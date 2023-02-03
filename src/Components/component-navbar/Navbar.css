@@ -19,3 +19,6 @@
 .user_name{
     color: #000000A6;
 }
+.logout{
+    cursor: pointer;
+}

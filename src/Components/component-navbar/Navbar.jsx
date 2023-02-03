@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { API_URL } from '../../config/constants';
 import AuthContext from '../../context/auth-context';
 import './Navbar.css'
@@ -8,6 +8,7 @@ const Navbar = () =>{
   const [userName, setUserName] = useState('');
   const [userPicture, setUserPicture] = useState('');
   const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
     useEffect(() => {
       if(user){
         setUserName(user.name);
@@ -19,6 +20,7 @@ const Navbar = () =>{
       setUserName("");
       setUserPicture("");
       setUser(null);
+      navigate('/login')
     }
 
     return(
@@ -52,7 +54,7 @@ const Navbar = () =>{
                     <ul className="dropdown-menu">
                             {userName ?
                             <>
-                              <li><span className="dropdown-item  py-2 px-4" onClick={logout}><i className="bi bi-box-arrow-left align-middle fs-5 me-2"></i> Log Out</span></li>
+                              <li><span className="dropdown-item  py-2 px-4 logout" to='' onClick={logout}><i className="bi bi-box-arrow-left align-middle fs-5 me-2"></i> Log Out</span></li>
                               <li><Link className="dropdown-item py-2 px-4" to="/admin"><i className="bi bi-person align-middle fs-5 me-2"></i> profile</Link></li>
                             </>
                             : <>

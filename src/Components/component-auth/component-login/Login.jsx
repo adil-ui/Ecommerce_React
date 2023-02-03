@@ -26,28 +26,28 @@ const Login = () => {
         }
       };
     return(
-        <section class="container row  mx-auto mt-5 py-3">
-            <div class="hero_left col-5 d-flex align-items-center px-5 mt-3">
+        <section className="container row  mx-auto mt-5 py-3">
+            <div className="hero_left col-5 d-flex align-items-center px-5 mt-3">
                 <div>
-                    <h2 class="text-white fw-bold mb-4 ">Welcome</h2>
-                    <h2 class="text-white fw-bold mb-4 hero_left_title stroke-text">We Are OnlineShop</h2>
-                    <h4 class="text-white fw-bold mb-4 ">Register Now <i class="bi bi-arrow-right fs-4 ms-2 align-middle"></i></h4>
+                    <h2 className="text-white fw-bold mb-4 ">Welcome</h2>
+                    <h2 className="text-white fw-bold mb-4 hero_left_title stroke-text">We Are OnlineShop</h2>
+                    <h4 className="text-white fw-bold mb-4 ">Register Now <i className="bi bi-arrow-right fs-4 ms-2 align-middle"></i></h4>
                 </div>
             </div>
-            <div class="login col-5 mx-auto">
-                <form onSubmit={clickLogin} class="row g-3 col-8 mx-auto mt-5 pt-5">
-                    <div class="mb-2 ">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control"  name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <div className="login col-5 mx-auto">
+                <form onSubmit={clickLogin} className="row g-3 col-8 mx-auto mt-5 pt-5">
+                    <div className="mb-2 ">
+                        <label className="form-label fw-semibold">Email</label>
+                        <input type="email" className="form-control"  name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
-                    <div class="">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control"  name='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <div className="">
+                        <label className="form-label fw-semibold">Password</label>
+                        <input type="password" className="form-control"  name='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
                     </div>               
                     <div className="message">{message ? <p>{message}</p> : null}</div>
-                    <div class="mt-4 d-flex justify-content-between align-items-center">
-                        <button type="submit" class="btn btn-primary">Connect</button>
-                        <NavLink to={'/register'} class="text-primary">Register ?</NavLink>
+                    <div className="mt-4 d-flex justify-content-between align-items-center">
+                        <button type="submit" className="btn btn-primary fw-semibold px-4">Connect</button>
+                        <NavLink to={'/register'} className="text-primary fw-semibold">Register ?</NavLink>
                     </div>
                 </form>
             </div>
