@@ -1,0 +1,21 @@
+.cart{
+    background-color: #ffc107;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 5px;
+    right: 0px;
+    font-size: 12px;
+}
+
+.logo_online{
+    color:#fcb500;
+}
+.logo_shop{
+    color:#eb8233
+}
+.user_name{
+    color: #000000A6;
+}

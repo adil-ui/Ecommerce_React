@@ -1,0 +1,21 @@
+.admin{
+  background-color: rgb(243, 243, 243);
+}
+aside, .height_100{
+    height: 100%;
+}
+.aside_link{
+    text-decoration:none;
+    color:black;
+    font-size: 18px;
+    font-weight:500;
+    transition: .5s;
+    display: block;
+    padding: 15px 0;
+  }
+  .aside_item{
+    transition: .5s;
+  }
+  .aside_item:hover{
+    background-color: #f0f0f0;
+  }
