@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useCart } from 'react-use-cart';
 import { API_URL } from '../../config/constants';
 import './Details.css'
 
 const Details =  () =>{
+    const { addItem } = useCart();
     const params = useParams();
     const [product, setProduct] = useState(null);
     useEffect(() =>{
-        fetch(API_URL +'api/details/'+ params.id)
+        fetch(API_URL +'api/details/'+params.id)
         .then(response => response.json())
         .then(result =>{
             console.log(result);
@@ -25,7 +27,7 @@ const Details =  () =>{
                 <h3 class="text-warning mb-3">{product?.promotion_price}.00 Dh</h3>
                 <h5 class="text-danger"><del>{product?.price}.00 Dh</del></h5>
                 <div class="mt-4">
-                    <a href="{{ route('add-cart', ['productId' => $product->id])}}" class="btn btn-warning fw-semibold">Add To Cart <i class="ms-2 bi bi-cart-plus-fill"></i></a>
+                    <button onClick={() => addItem(product)} class="btn btn-warning fw-semibold">Add To Cart <i class="ms-2 bi bi-cart-plus-fill"></i></button>
                 </div>
             </div>
         </section>

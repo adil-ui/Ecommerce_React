@@ -1,0 +1,16 @@
+.myCart{
+    background-color: rgb(244, 244, 244);
+
+}
+.cartItem{
+    height: 100%;
+}
+.cart_img {
+    width: 150px;
+    height: 150px;
+}
+
+
+.description {
+    text-align: justify
+}

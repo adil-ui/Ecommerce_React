@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useCart } from 'react-use-cart';
 import { API_URL } from '../../../config/constants';
 import './Men.css'
 
 const Men = () =>{
+    const { addItem } = useCart();
     const [MenCategory, setMenCategory] = useState([]);
-    const navigate = useNavigate();
     useEffect(() => {
         fetch(API_URL + "api/men-category")
         .then(response => response.json())
@@ -14,9 +15,7 @@ const Men = () =>{
              
         })
       }, [])
-      const navigateTo = (item) => {
-        navigate(`${item.id}`)
-    }
+
     
     return(
         <section className='container mx-auto mt-5 pt-4'>
@@ -41,7 +40,7 @@ const Men = () =>{
                                 <h5 className="price_color text-bold" >{elt.promotion_price}.00 Dh</h5>
                             </div>
                             <div className="d-flex justify-content-end mt-3">
-                                <a href="#home" className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></a>
+                                <button onClick={() => addItem(elt)} className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></button>
                             </div>
                         </div>
                     </div>

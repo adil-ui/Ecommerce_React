@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
 import { API_URL } from '../../config/constants';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import {  useCart } from "react-use-cart";
+
 
 const Home = () =>{
+    const { addItem } = useCart();
+
     const [womenProduct, setWomenProduct] = useState([]);
     const [menProduct, setMenProduct] = useState([]);
     const [kidProduct, setKidProduct] = useState([]);
-    const navigate = useNavigate();
     useEffect(() => {
         fetch(API_URL + "api/home")
         .then(response => response.json())
@@ -17,25 +20,22 @@ const Home = () =>{
             setKidProduct(result.kids);     
         })
       }, [])
-      const navigateTo = (item) => {
-        navigate(`${item.id}`)
-    }
     return(
         <section className="container mx-auto py-5 row gx-4 gy-5 mt-4" >
             <div className='hero_section row  py-5 mx-auto'> 
                 <div className="hero_left col-4 d-flex align-items-center px-5 ">
                     <div>
                         <h2 className="text-white fw-bold mb-4 hero_left_title">We Are OnlineShop</h2>
-                        <a href="{{ route('our-product') }}" className="btn btn-outline-light px-4 py-2 fw-semibold">Purchase Now!</a>
+                        <NavLink to="/our-product" className="btn btn-outline-light px-4 py-2 fw-semibold">Purchase Now!</NavLink>
                     </div>
                 </div>
-                <div className="hero_right col-8 row gx-5 ms-auto">
+                <div className="hero_right col-8 row gx-4 ms-auto">
                     <div className="col-6 mb-2">
                         <div className="top_left d-flex align-items-center px-4" >
                             <div className="text-center mx-auto">
                                 <h3 className="text-white fw-bold mb-4 ">Women</h3>
                                 <p className="text-white"><i>Best Clothes For Women</i></p>
-                                <a href="{{ route('women-product') }}" className="btn btn-outline-light">Discover More</a>
+                                <NavLink to="/women" className="btn btn-outline-light">Discover More</NavLink>
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@ const Home = () =>{
                             <div className="text-center mx-auto">
                                 <h3 className="text-white fw-bold mb-4 ">Men</h3>
                                 <p className="text-white"><i>Best Clothes For Men</i></p>
-                                <a href="{{ route('men-product') }}" className="btn btn-outline-light">Discover More</a>
+                                <NavLink to="/men" className="btn btn-outline-light">Discover More</NavLink>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ const Home = () =>{
                             <div className="text-center mx-auto">
                                 <h3 className="text-white fw-bold mb-4 ">Kids</h3>
                                 <p className="text-white"><i>Best Clothes For Kids</i></p>
-                                <a href="{{ route('kid-product') }}" className="btn btn-outline-light">Discover More</a>
+                                <NavLink to="/kid" className="btn btn-outline-light">Discover More</NavLink>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ const Home = () =>{
                                 <h5 className="price_color text-bold" >{elt.promotion_price}.00 Dh</h5>
                             </div>
                             <div className="d-flex justify-content-end mt-3">
-                                <a href="#home" className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></a>
+                                <button onClick={() => addItem(elt)} className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></button>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ const Home = () =>{
                                 <h5 className="price_color text-bold" >{elt.promotion_price}.00 Dh</h5>
                             </div>
                             <div className="d-flex justify-content-end mt-3">
-                                <a href="#home" className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></a>
+                                <button onClick={() => addItem(elt)} className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></button>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ const Home = () =>{
                                 <h5 className="price_color text-bold" >{elt.promotion_price}.00 Dh</h5>
                             </div>
                             <div className="d-flex justify-content-end mt-3">
-                                <a href="#home" className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></a>
+                                <button onClick={() => addItem(elt)} className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></button>
                             </div>
                         </div>
                     </div>

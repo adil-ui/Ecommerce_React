@@ -19,7 +19,7 @@ const Login = () => {
           let res = await axios.post(API_URL + "api/login", { email, password})
           setUser(res.data);
           localStorage.setItem('user', JSON.stringify(res.data));
-          navigate('/home')
+          navigate('/')
         } catch (err) {
           console.log(err);
           setMessage('User not Found');

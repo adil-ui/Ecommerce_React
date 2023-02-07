@@ -1,0 +1,14 @@
+.myOrder{
+    height: 100%;
+}
+.cart_img{
+    width: 150px;
+    height: 150px;
+}
+
+.cart_command{
+    height: 200px;
+}
+.description{
+    text-align: justify
+}

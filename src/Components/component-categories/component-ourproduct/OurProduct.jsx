@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useCart } from 'react-use-cart';
 import { API_URL } from '../../../config/constants';
 import './OurProduct.css'
 
 const OurProduct = () =>{
+    const { addItem } = useCart();
     const [products, setProducts] = useState([]);
-    const navigate = useNavigate();
     useEffect(() => {
         fetch(API_URL + "api/all-product")
         .then(response => response.json())
@@ -14,9 +15,6 @@ const OurProduct = () =>{
              
         })
       }, [])
-      const navigateTo = (item) => {
-        navigate(`${item.id}`)
-    }
     
     return(
         <section className='container mx-auto mt-5 pt-4'>
@@ -41,7 +39,7 @@ const OurProduct = () =>{
                                 <h5 className="price_color text-bold" >{elt.promotion_price}.00 Dh</h5>
                             </div>
                             <div className="d-flex justify-content-end mt-3">
-                                <a href="#home" className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></a>
+                                <button onClick={() => addItem(elt)} className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></button>
                             </div>
                         </div>
                     </div>

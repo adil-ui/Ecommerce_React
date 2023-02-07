@@ -18,6 +18,10 @@ import Footer from './Components/component-footer/Footer';
 import Home from './Components/component-home/Home';
 import Navbar from './Components/component-navbar/Navbar';
 import { useEffect, useState } from 'react';
+import Cart from './Components/component-cart/Cart';
+import Order from './Components/component.order/Order';
+import EditProduct from './Components/Component-dashboard/component-edit-product/EditProduct';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [user, setUser] = useState();
@@ -34,22 +38,28 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element = {<Home />} />
-          <Route path='/home' element = {<Home />} />
           <Route path='/details/:id' element={<Details/>}/>
           <Route path='/kid' element={<Kid/>}/>
           <Route path='/men' element={<Men/>}/>
           <Route path='/women' element={<Women/>}/>
-          <Route path='/ourproduct' element={<OurProduct/>}/>
+          <Route path='/our-product' element={<OurProduct/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/order' element={<Order/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/admin' element={<Aside/>} end>
+          <Route path='/admin' element={<ProtectedRoute  user={user}>
+            <Aside/>
+          </ProtectedRoute>} end>
                 <Route path='' element = {<Profile />} end />                 
-                <Route path='list-product' element = {<ListProduct />}  />                 
+                <Route path='list-product' element = {<ProtectedRoute  user={user}><ListProduct /></ProtectedRoute>}  />                 
+                <Route path='edit-product/:id' element = {<ProtectedRoute  user={user}><EditProduct /></ProtectedRoute>}  />                 
                 <Route path='add-product' element = {<AddProduct />} /> 
                 <Route path='list-order' element = {<ListOrder />} /> 
           </Route>
-          </Routes>
-
+          <Route path='*' element={<div className='page404 d-flex  justify-content-center align-items-center'><h2 className='text-danger fw-semibold'>404 Page Not Found</h2></div>} />
+        </Routes>
+         
+         
       </main>
       <Footer />
     </AuthContext.Provider>

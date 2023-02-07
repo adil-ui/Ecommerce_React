@@ -1,23 +1,27 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { API_URL } from '../../../config/constants';
 import './ListProduct.css'
 
-const ListProduct = () =>{
+const ListProduct = () => {
     const [products, setProducts] = useState([]);
-    const navigate = useNavigate();
     useEffect(() => {
         fetch(API_URL + "api/all-product")
-        .then(response => response.json())
-        .then(result =>{
-            setProducts(result.products);
-             
-        })
-      }, [])
-      const navigateTo = (item) => {
-        navigate(`${item.id}`)
+            .then(response => response.json())
+            .then(result => {
+                setProducts(result.products);
+
+            })
+    }, [])
+
+    const deleteProduct = (id) => {
+        axios.delete(API_URL + 'api/delete/' + id)
+            .then(() => {
+                window.location.reload();
+            });
     }
-    return(       
+    return (
         <table className="table table-hover">
             <thead>
                 <tr>
@@ -31,20 +35,20 @@ const ListProduct = () =>{
                 </tr>
             </thead>
             <tbody>
-            {products.map(product => (
-                <tr>
-                    <th className='pt-4' scope="row">id</th>
-                    <td className='pt-3'><img src={`${API_URL}${product.picture}`} alt="product_img" width="50" height="50" className="rounded-circle mx-auto" /></td>
-                    <td className='pt-4'>{product.title}</td>
-                    <td className='pt-4'>{product.price} Dh</td>
-                    <td className='pt-4'>{product.discount_rate} %</td>
-                    <td className='pt-4'>{product.promotion_price} Dh</td>
-                    <td>
-                        <a href="/edit-product" onClick={() => navigateTo(product)} className="btn btn-warning me-1">Edit</a>
-                        <a href="/delete-product" className="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            ))}                    
+                {products.map(product => (
+                    <tr>
+                        <th className='pt-4' scope="row">{product.id}</th>
+                        <td className=''><img src={`${API_URL}${product.picture}`} alt="product_img" width="50" height="50" className="rounded-circle mx-auto" /></td>
+                        <td className='pt-4'>{product.title}</td>
+                        <td className='pt-4'>{product.price}.00 Dh</td>
+                        <td className='pt-4'>{product.discount_rate}%</td>
+                        <td className='pt-4'>{product.promotion_price}.00 Dh</td>
+                        <td className='pt-3'>
+                            <NavLink to={`/admin/edit-product/${product.id}`} className="btn btn-warning me-1">Edit</NavLink>
+                            <button onClick={() => deleteProduct(product.id)} className="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                ))}
             </tbody>
         </table>
     )
