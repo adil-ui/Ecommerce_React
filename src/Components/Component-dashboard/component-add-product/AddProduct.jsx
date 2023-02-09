@@ -28,9 +28,8 @@ const AddProduct = () => {
         formData.append("discount", discount);
         formData.append("stock", stock);
         try {
-            const res = await axios.post(API_URL + "api/add-product", formData);
-            console.log(res.data);
-            navigate('/login');
+            await axios.post(API_URL + "api/add-product", formData);
+            setMessage('Added successuful');
         } catch (err) {
             setMessage(err.message);
             console.log(err.response);
@@ -46,7 +45,6 @@ const AddProduct = () => {
             <div class="col-md-6 ">
                 <label class="form-label"> Category <span class="text-danger">*</span></label>
                 <select class="form-select" aria-label="Default select example" onChange={(e) => {
-                    console.log(e.target.value);
                     setCategory(e.target.value)
                 }} name='category' >
                     <option value="1">Women</option>
@@ -76,8 +74,8 @@ const AddProduct = () => {
                 <label class="form-label">Stock <span class="text-danger">*</span></label>
                 <input type="number" class="form-control" name='stock' value={stock} onChange={(e) => setStock(e.target.value)} required />
             </div>
-            <div className="message">{message ? <p>{message}</p> : null}</div>
-            <div class="col-12 d-flex justify-content-end mt-4">
+            <div className="text-warning fw-semibold text-center fs-5 mt-3">{message ? <p>{message}</p> : null}</div>
+            <div class="col-12 d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn-primary ">Submit</button>
             </div>
         </form>

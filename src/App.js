@@ -22,6 +22,8 @@ import Cart from './Components/component-cart/Cart';
 import Order from './Components/component.order/Order';
 import EditProduct from './Components/Component-dashboard/component-edit-product/EditProduct';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import ForgotPassword from './Components/component-auth/component-forgot-password/ForgotPassword';
+import ResetPassword from './Components/component-auth/component.reset-password/ResetPassword';
 
 function App() {
   const [user, setUser] = useState();
@@ -47,6 +49,8 @@ function App() {
           <Route path='/order' element={<Order/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/forgot-password' element={<ForgotPassword/>}/>
+          <Route path='/reset-password' element={<ResetPassword/>}/>
           <Route path='/admin' element={<ProtectedRoute  user={user}>
             <Aside/>
           </ProtectedRoute>} end>

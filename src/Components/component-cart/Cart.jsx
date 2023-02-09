@@ -21,6 +21,12 @@ const Cart = () => {
             <div className=" container mx-auto row d-flex justify-content-between ">
                 <div className="cartItem col-8 bg-white rounded-1 py-2 shadow-sm">
                     <h4 className='fw-semibold m-3'>Cart ({totalItems})</h4>
+                    {totalItems === 0? 
+                    <div class="text-center my-5">
+                        <h4 class="mb-4 fw-semibold">Your cart is empty</h4>
+                        <NavLink to='/our-product' className="btn btn-warning fw-semibold">Purchase Now</NavLink>
+                    </div>
+                     : null}
                     {items.map(item => (
                         <div className="col-12 mt-2 p-4 shadow-sm" key={item.id}>
                             <div className="row">
@@ -57,7 +63,9 @@ const Cart = () => {
                         <h5 className="my-4 fw-semibold">Total: </h5>
                         <h4 className="text-warning fw-semibold">{cartTotal}.00 Dh</h4>
                     </div>
-                    <NavLink to='/order' className="btn btn-warning fw-semibold">Command</NavLink>
+                    {totalItems === 0? null
+                     : <NavLink to='/order' className="btn btn-warning fw-semibold">Command</NavLink>}
+                    
                 </div>
             </div>
         </section>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useCart } from 'react-use-cart';
 import { API_URL } from '../../config/constants';
@@ -12,9 +13,12 @@ const Order = () => {
         totalItems
 
     } = useCart();
+    const [paymentMethod, setPaymentMethod] = useState('');
     const [userName, setUserName] = useState('');
     const [userPhone, setUserPhone] = useState('');
     const [userAddress, setUserAddress] = useState('');
+    const [message, setMessage] = useState("");
+
     const { user } = useContext(AuthContext);
     useEffect(() => {
         if (user) {
@@ -23,34 +27,50 @@ const Order = () => {
             setUserAddress(user.adress);
         }
     }, [user])
-    const order = () => {
+    const order = async (e) => {
         const formData = new FormData();
         formData.append("user", JSON.stringify({
             'address': userAddress,
+            'phone': userPhone,
+        }
+        ));
+        formData.append("order", JSON.stringify({
+                'user_id':user.id,
+                'total': cartTotal,
+                'payment_method':paymentMethod,
         }
         ))
-        
+        try {
+            await axios.post(API_URL + "api/checkout", formData);
+            setMessage('Added successuful');
+        } catch (err) {
+            setMessage(err.message);
+            console.log(err.response);
+        }
     }
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
     return (
         <section className='myCart mt-5 py-5'>
             <div class=" container mx-auto row d-flex justify-content-between ">
                 <div class="col-7 bg-white shadow-sm rounded-1 py-4 myOrder">
-                    <form class="row g-3 col-10 mx-auto " action='' method='POST' enctype="multipart/form-data">
+                    <form class="row g-3 col-10 mx-auto " onSubmit={order} method='POST' encType="multipart/form-data">
                         <div class="col-md-12 mb-3">
                             <label class="form-label fw-semibold">Name</label>
-                            <input type="text" class="form-control" name='name' value={userName} disabled />
+                            <input type="text" class="form-control" name='name' value={userName}  disabled />
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label fw-semibold">Phone</label>
-                            <input type="number" class="form-control" name='phone' value={userPhone} />
+                            <input type="number" class="form-control" name='phone' value={userPhone} onChange={(e) => setUserPhone(e.target.value)} required/>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label fw-semibold">Address</label>
-                            <input type="text" class="form-control" name='address' value={userAddress} required />
+                            <input type="text" class="form-control" name='address' value={userAddress} onChange={(e) => setUserAddress(e.target.value)} required />
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label fw-semibold">Shipping Method</label>
-                            <select class="form-select" aria-label="Default select example" name='checkout_method'>
+                            <select class="form-select" onChange={(e) => {setPaymentMethod(e.target.value)}} aria-label="Default select example" name='checkout_method'>
                                 <option value="cash">Cash</option>
                                 <option value="paypal">Paypal</option>
                                 <option value="carte">Card</option>

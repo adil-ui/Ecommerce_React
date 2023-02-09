@@ -15,7 +15,9 @@ const Kid = () =>{
              
         })
       }, [])
-    
+      useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
     return(
         <section className='container mx-auto mt-5 pt-4'>
             <div class="Product_category  mt-5 mb-4 d-flex justify-content-center align-items-center " >
@@ -36,7 +38,7 @@ const Kid = () =>{
                             <small className="">{elt.description.substring(1, 80)}...</small>
                             <div className="d-flex justify-content-between align-items-center mt-3">
                                 <h6 className="text-danger"><del>{elt.price}.00 Dh</del> </h6>
-                                <h5 className="price_color text-bold" >{elt.promotion_price}.00 Dh</h5>
+                                <h5 className="price_color fw-bolder" >{elt.promotion_price}.00 Dh</h5>
                             </div>
                             <div className="d-flex justify-content-end mt-3">
                                 <button onClick={() => addItem(elt)} className="btn btn-warning fw-semibold">Add To Cart <i className="ms-2 bi bi-cart-plus-fill"></i></button>
