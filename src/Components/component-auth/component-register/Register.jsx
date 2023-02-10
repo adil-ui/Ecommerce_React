@@ -74,9 +74,9 @@ const Register = () => {
                     <label class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
                     <input type="password" class="form-control"  name='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <div className="message">{message ? <p>{message}</p> : null}</div>
+                <div className="message text-warning">{message ? <p>{message}</p> : null}</div>
                 <div class="ms-auto col-11">
-                    <button type="submit" class="btn btn-primary fw-semibold px-4">Submit</button>
+                    <button type="submit" class="btn btn-warning col-12 fw-semibold px-4">Submit</button>
                 </div>
             </form>
         </section>

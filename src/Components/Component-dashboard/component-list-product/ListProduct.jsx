@@ -11,7 +11,6 @@ const ListProduct = () => {
             .then(response => response.json())
             .then(result => {
                 setProducts(result.products);
-
             })
     }, [])
 

@@ -1,6 +1,5 @@
-import './ForgotPassword.css'
 
-const ForgotPassword = () =>{
+const ConfirmEmail = () =>{
     return(
         <section className="container row  mx-auto mt-5 py-3">
             <div className="hero_left col-5 d-flex align-items-center px-5 mt-3">
@@ -14,8 +13,8 @@ const ForgotPassword = () =>{
                 <form onSubmit={''} className="row g-3 col-8 mx-auto ">
                     <h4 className='text-center fw-bold mb-4 text-warning'>Forgot Password</h4>
                     <div className="mb-2 ">
-                        <label className="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                        <input type="email" className="form-control" name='email' value={''} required />
+                        <label className="form-label fw-semibold">Code <span class="text-danger">*</span></label>
+                        <input type="text" className="form-control" name='code' value={''} required />
                     </div>
                     <div className="mt-4">
                         <button type="submit" className="btn btn-warning col-12 fw-semibold px-4">Submit</button>
@@ -26,4 +25,4 @@ const ForgotPassword = () =>{
     )
 }
 
-export default ForgotPassword
+export default ConfirmEmail

@@ -14,15 +14,15 @@ const ResetPassword = () =>{
             <form onSubmit={''} className="row g-3 col-8 mx-auto">
             <h5 className='text-center fw-bold mb-4 text-warning'>Reset Password</h5>
                 <div className="mb-2 ">
-                    <label className="form-label fw-semibold">Password</label>
+                    <label className="form-label fw-semibold">Password <span class="text-danger">*</span></label>
                     <input type="password" className="form-control" name='password' value={''}  required />
                 </div>
                 <div className="mb-2 ">
-                    <label className="form-label fw-semibold">Confirm Password</label>
+                    <label className="form-label fw-semibold">Confirm Password <span class="text-danger">*</span></label>
                     <input type="password" className="form-control" name='confirmPassword' value={''}  required />
                 </div>
                 <div className="mt-4">
-                    <button type="submit" className="btn btn-primary col-12 fw-semibold px-4">Submit</button>
+                    <button type="submit" className="btn btn-warning col-12 fw-semibold px-4">Submit</button>
                 </div>
             </form>
         </div>

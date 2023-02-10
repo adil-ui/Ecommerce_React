@@ -12,16 +12,12 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const { setUser } = useContext(AuthContext);
-
-
     const navigate = useNavigate();
-
-
 
     const clickLogin = async (e) => {
         e.preventDefault();
         axiosInstance.get("sanctum/csrf-cookie").then(async response => {
-            console.log(response);
+        console.log(response);
             try {
                 let res = await axiosInstance.post("api/login", { email, password })
                 axios.defaults.headers.common["X-XSRF-TOKEN"] = getCookie("XSRF-TOKEN");
@@ -47,7 +43,7 @@ const Login = () => {
             </div>
             <div className="login col-5 mx-auto d-flex align-items-center">
                 <form onSubmit={clickLogin} className="row g-3 col-8 mx-auto">
-                <h4 className='text-center fw-bolder mb-4 text-warning'>Login</h4>
+                <h3 className='text-center fw-bolder mb-4 text-warning'>Login</h3>
                     <div className="mb-2 ">
                         <label className="form-label fw-semibold">Email</label>
                         <input type="email" className="form-control" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -58,11 +54,11 @@ const Login = () => {
                     </div>
                     <div className="message">{message ? <p>{message}</p> : null}</div>
                     <div className="mt-4 d-flex align-items-center justify-content-between">
-                        <NavLink to={'/forgot-password'} className="text-primary fw-semibold">Forgot Password ?</NavLink>
-                        <NavLink to={'/register'} className="text-primary fw-semibold">Register ?</NavLink>
+                        <NavLink to={'/forgot-password'} className="text-warning fw-semibold">Forgot Password ?</NavLink>
+                        <NavLink to={'/register'} className="text-warning fw-semibold">Register ?</NavLink>
                     </div>
                     <div className="mt-4">
-                        <button type="submit" className="btn btn-primary col-12 fw-semibold px-4">Connect</button>
+                        <button type="submit" className="btn btn-warning col-12 fw-semibold px-4">Connect</button>
                     </div>
                 </form>
             </div>

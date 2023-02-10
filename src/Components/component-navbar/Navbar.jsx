@@ -50,6 +50,9 @@ const Navbar = () => {
             <li className="nav-item me-2">
               <NavLink className="nav-link fw-semibold" to="/kid">Kids's</NavLink>
             </li>
+            <li className="nav-item me-2">
+              <NavLink className="nav-link fw-semibold" to="/contact">Contact</NavLink>
+            </li>
             <li className="nav-item dropdown me-2">
               <span className="nav-link dropdown-toggle " style={{cursor:'pointer'}} data-bs-toggle="dropdown" aria-expanded="false">
                 {user ? <><img src={API_URL + userPicture} alt="" width='40px' className='align-middle me-2 border border-3 border-warning rounded-circle' /><span className='fw-semibold user_name'>Hi, {userName}</span></> : <i className="bi bi-person-circle fs-4 "></i>}
@@ -58,7 +61,8 @@ const Navbar = () => {
                 {user ?
                   <>
                     <li><span className="dropdown-item  py-2 px-4 logout" to='' onClick={logout}><i className="bi bi-box-arrow-left align-middle fs-5 me-2"></i> Log Out</span></li>
-                    <li><Link className="dropdown-item py-2 px-4" to="/admin"><i className="bi bi-person align-middle fs-5 me-2"></i> profile</Link></li>
+                    <li><Link className="dropdown-item py-2 px-4" to="/admin"><i className="bi bi-person align-middle fs-5 me-2"></i> My Account</Link></li>
+                    <li><Link className="dropdown-item py-2 px-4" to="/admin/list-order"><i className="bi bi-person align-middle fs-5 me-2"></i> My Orders</Link></li>
                   </>
                   : <>
                     <li><Link className="dropdown-item py-2 px-4" to="/login"><i className="bi bi-box-arrow-in-right align-middle fs-5 me-2"></i> Login</Link></li>

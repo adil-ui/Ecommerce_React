@@ -88,7 +88,7 @@ const EditProduct = () => {
                 <label className="form-label">Stock <span className="text-danger">*</span></label>
                 <input type="number" className="form-control" name='stock' value={stock} onChange={(e) => setStock(e.target.value)} required />
             </div>
-            <div classNameName="message">{message ? <p>{message}</p> : null}</div>
+            {message ? <p className='alert alert-warning text-center'>{message}</p> : null}
             <div className="col-12 d-flex justify-content-end mt-4">
                 <button type="submit" className="btn btn-primary ">Submit</button>
             </div>
