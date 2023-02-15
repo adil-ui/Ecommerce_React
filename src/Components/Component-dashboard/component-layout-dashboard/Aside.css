@@ -1,5 +1,13 @@
-.admin{
+
+.admin_back{
   background-color: rgb(243, 243, 243);
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: -1;
 }
 aside, .height_100{
     height: 100%;
@@ -18,4 +26,7 @@ aside, .height_100{
   }
   .aside_item:hover{
     background-color: #f0f0f0;
+  }
+  .icon_color{
+    color: #ecb100;
   }

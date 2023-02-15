@@ -55,18 +55,19 @@ const Navbar = () => {
             </li>
             <li className="nav-item dropdown me-2">
               <span className="nav-link dropdown-toggle " style={{cursor:'pointer'}} data-bs-toggle="dropdown" aria-expanded="false">
-                {user ? <><img src={API_URL + userPicture} alt="" width='40px' className='align-middle me-2 border border-3 border-warning rounded-circle' /><span className='fw-semibold user_name'>Hi, {userName}</span></> : <i className="bi bi-person-circle fs-4 "></i>}
+                {user ? <><img src={API_URL + userPicture} alt="" width='40px' className='align-middle me-2 border border-2 border-warning rounded-circle' /><span className='fw-semibold user_name'>Hi, {userName}</span></> : <i className="bi bi-person-circle fs-4 "></i>}
               </span>
               <ul className="dropdown-menu">
                 {user ?
                   <>
-                    <li><span className="dropdown-item  py-2 px-4 logout" to='' onClick={logout}><i className="bi bi-box-arrow-left align-middle fs-5 me-2"></i> Log Out</span></li>
-                    <li><Link className="dropdown-item py-2 px-4" to="/admin"><i className="bi bi-person align-middle fs-5 me-2"></i> My Account</Link></li>
-                    <li><Link className="dropdown-item py-2 px-4" to="/admin/list-order"><i className="bi bi-person align-middle fs-5 me-2"></i> My Orders</Link></li>
+                    <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/admin"><i className="bi bi-person-lines-fill align-middle fs-5 me-2 text-warning"></i> Your Profile</Link></li>
+                    <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/admin/list-order"><i className="bi bi-box2-fill align-middle fs-5 me-2 text-warning"></i> Your Orders</Link></li>
+                    <li><hr class="dropdown-divider p-0 " /></li>
+                    <li><span className="dropdown-item nav-link  py-2 px-4 logout fw-semibold"  onClick={logout}><i className="bi bi-door-closed-fill align-middle fs-5 me-2 text-warning"></i> Log Out</span></li>
                   </>
                   : <>
-                    <li><Link className="dropdown-item py-2 px-4" to="/login"><i className="bi bi-box-arrow-in-right align-middle fs-5 me-2"></i> Login</Link></li>
-                    <li><Link className="dropdown-item py-2 px-4" to="/register"><i className="bi bi-person-plus align-middle fs-5 me-2"></i> Register</Link></li>
+                    <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/login"><i className="bi bi-door-open-fill align-middle fs-5 me-2 text-warning"></i> Login</Link></li>
+                    <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/register"><i className="bi bi-person-fill-add align-middle fs-5 me-2 text-warning"></i> Register</Link></li>
                   </>
                 }
               </ul>

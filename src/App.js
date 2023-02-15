@@ -13,7 +13,6 @@ import Aside from './Components/Component-dashboard/component-layout-dashboard/A
 import ListProduct from './Components/Component-dashboard/component-list-product/ListProduct';
 import Profile from './Components/Component-dashboard/component-profil/Profile';
 import Details from './Components/component-details/Details';
-import Footer from './Components/component-footer/Footer';
 import Home from './Components/component-home/Home';
 import Navbar from './Components/component-navbar/Navbar';
 import { useEffect, useState } from 'react';
@@ -25,9 +24,9 @@ import ForgotPassword from './Components/component-auth/component-forgot-passwor
 import ResetPassword from './Components/component-auth/component.reset-password/ResetPassword';
 import Contact from './Components/component-contact/Contact';
 import ConfirmEmail from './Components/component-auth/Component-validation/ConfirmEmail';
-import ListOrders from './Components/Component-dashboard/comoponent-list-order/ListOrder';
 import OrderDetails from './Components/Component-dashboard/component-order-details/OrderDetails';
 import AllOrders from './Components/Component-dashboard/component-all-orders/AllOrders';
+import MyOrder from './Components/Component-dashboard/comoponent-list-order/MyOrder';
 
 function App() {
   const [user, setUser] = useState();
@@ -53,10 +52,11 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/order' element={<Order/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/login' element={<Login/>}/>
+          {user? null : <Route path='/login'  element={<Login/>} />}
+          <Route path='/login'  element={<Login/>} />
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
           <Route path='/confirm-email' element={<ConfirmEmail/>}/>
-          <Route path='/reset-password' element={<ResetPassword/>}/>
+          <Route path='/reset-password/:token' element={<ResetPassword/>}/>
           <Route path='/admin' element={<ProtectedRoute  user={user}>
             <Aside/>
           </ProtectedRoute>} end>
@@ -65,7 +65,7 @@ function App() {
                 <Route path='edit-product/:id' element = {<ProtectedRoute  user={user}><EditProduct /></ProtectedRoute>}  />                 
                 <Route path='add-product' element = {<ProtectedRoute  user={user}><AddProduct /></ProtectedRoute>} /> 
                 <Route path='all-orders' element = {<ProtectedRoute  user={user}><AllOrders /></ProtectedRoute>} /> 
-                <Route path='list-order' element = {<ProtectedRoute  user={user}><ListOrders /></ProtectedRoute>} /> 
+                <Route path='list-order' element = {<ProtectedRoute  user={user}><MyOrder /></ProtectedRoute>} /> 
                 <Route path='order-details/:id' element = {<ProtectedRoute  user={user}><OrderDetails /></ProtectedRoute>}  />                 
           </Route>
           <Route path='*' element={<div className='page404 d-flex  justify-content-center align-items-center'><h2 className='text-danger fw-semibold'>404 Page Not Found</h2></div>} />
@@ -73,7 +73,7 @@ function App() {
          
          
       </main>
-      <Footer />
+      
     </AuthContext.Provider>
   );
 }

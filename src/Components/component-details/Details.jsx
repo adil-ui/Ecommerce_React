@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from 'react-use-cart';
 import { API_URL } from '../../config/constants';
+import Footer from '../component-footer/Footer';
 import './Details.css'
 
 const Details =  () =>{
@@ -20,6 +21,7 @@ const Details =  () =>{
         window.scroll(0, 0);
     }, [])
     return(
+        <>
         <section class="details row d-flex justify-content-around container mx-auto my-5 py-5">
             <div class="col-4 mt-4">
                 <img src={`${API_URL}${product?.picture}`} alt="product" className='details_img' />
@@ -34,6 +36,8 @@ const Details =  () =>{
                 </div>
             </div>
         </section>
+        <Footer />
+        </>
     )
 }
 

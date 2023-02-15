@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Footer from '../component-footer/Footer';
 import './Contact.css'
 
 const Contact = () =>{
@@ -11,7 +12,8 @@ const Contact = () =>{
         e.preventDefault();
     };
     return(
-        <section className="container row  mx-auto mt-5 py-3">
+        <>
+        <section className="container row  mx-auto mt-5 py-5">
             <div className="hero_left col-5 d-flex align-items-center px-5 mt-3">
                 <div>
                     <h2 className="text-white fw-bold mb-4 ">Welcome</h2>
@@ -41,6 +43,8 @@ const Contact = () =>{
                 </form>
             </div>
         </section>
+         <Footer />
+         </>
     )
 }
 

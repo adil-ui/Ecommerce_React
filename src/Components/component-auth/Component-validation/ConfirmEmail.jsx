@@ -1,6 +1,8 @@
+import Footer from "../../component-footer/Footer"
 
 const ConfirmEmail = () =>{
     return(
+        <>
         <section className="container row  mx-auto mt-5 py-3">
             <div className="hero_left col-5 d-flex align-items-center px-5 mt-3">
                 <div>
@@ -22,6 +24,8 @@ const ConfirmEmail = () =>{
                 </form>
             </div>
         </section>
+        <Footer />
+        </>
     )
 }
 

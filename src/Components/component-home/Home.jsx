@@ -4,7 +4,7 @@ import './Home.css'
 import { API_URL } from '../../config/constants';
 import { NavLink } from 'react-router-dom';
 import { useCart } from "react-use-cart";
-import getCookie from '../../helpers/getCookie';
+import Footer from '../component-footer/Footer';
 
 
 const Home = () => {
@@ -28,6 +28,7 @@ const Home = () => {
         window.scroll(0, 0);
     }, [])
     return (
+        <>
         <section className="container mx-auto py-5 row gx-4 gy-5 mt-4" >
             <div className='hero_section row  py-5 mx-auto'>
                 <div className="hero_left col-4 d-flex align-items-center px-5 ">
@@ -147,6 +148,8 @@ const Home = () => {
                 </div>
             ))}
         </section>
+        <Footer />
+        </>
     )
 }
 

@@ -3,6 +3,7 @@ import { useCart } from "react-use-cart";
 import { NavLink } from 'react-router-dom';
 import { API_URL } from '../../config/constants';
 import { useEffect } from 'react';
+import Footer from '../component-footer/Footer';
 
 const Cart = () => {
     const {
@@ -17,6 +18,7 @@ const Cart = () => {
         window.scroll(0, 0);
     }, [])
     return (
+        <>
         <section className='myCart mt-5 py-5'>
             <div className=" container mx-auto row d-flex justify-content-between ">
                 <div className="cartItem col-8 bg-white rounded-1 py-2 shadow-sm">
@@ -64,11 +66,13 @@ const Cart = () => {
                         <h4 className="text-warning fw-semibold">{cartTotal}.00 Dh</h4>
                     </div>
                     {totalItems === 0? null
-                     : <NavLink to='/order' className="btn btn-warning fw-semibold">Command</NavLink>}
+                     : <NavLink to='/order' className="btn btn-warning fw-semibold">Checkout</NavLink>}
                     
                 </div>
             </div>
         </section>
+        <Footer />
+        </>
 
     )
 }
