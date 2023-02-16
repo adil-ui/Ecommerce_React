@@ -39,3 +39,17 @@
 	}
 
 	 */
+
+.page-link{
+	cursor: pointer;
+}
+.all_product{
+	height: 500px;
+	position: relative;
+}
+.pagination_product{
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translate(-50%,0);
+}

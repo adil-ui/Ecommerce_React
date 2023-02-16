@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart';
@@ -19,11 +20,20 @@ const Navbar = () => {
     }
   }, [user])
   const logout = () => {
-    localStorage.removeItem("user");
-    setUserName("");
-    setUserPicture("");
-    setUser(null);
-    navigate('/login')
+    axios.post(API_URL + 'api/revoke-tokens/', { id: user.id }, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    })
+      .then(response => {
+        localStorage.removeItem("user");
+        setUserName("");
+        setUserPicture("");
+        setUser(null);
+        navigate('/login')
+      }).catch(error => {
+        console.log(error);
+      });
   }
 
   return (
@@ -54,7 +64,7 @@ const Navbar = () => {
               <NavLink className="nav-link fw-semibold" to="/contact">Contact</NavLink>
             </li>
             <li className="nav-item dropdown me-2">
-              <span className="nav-link dropdown-toggle " style={{cursor:'pointer'}} data-bs-toggle="dropdown" aria-expanded="false">
+              <span className="nav-link dropdown-toggle " style={{ cursor: 'pointer' }} data-bs-toggle="dropdown" aria-expanded="false">
                 {user ? <><img src={API_URL + userPicture} alt="" width='40px' className='align-middle me-2 border border-2 border-warning rounded-circle' /><span className='fw-semibold user_name'>Hi, {userName}</span></> : <i className="bi bi-person-circle fs-4 "></i>}
               </span>
               <ul className="dropdown-menu">
@@ -63,7 +73,7 @@ const Navbar = () => {
                     <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/admin"><i className="bi bi-person-lines-fill align-middle fs-5 me-2 text-warning"></i> Your Profile</Link></li>
                     <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/admin/list-order"><i className="bi bi-box2-fill align-middle fs-5 me-2 text-warning"></i> Your Orders</Link></li>
                     <li><hr class="dropdown-divider p-0 " /></li>
-                    <li><span className="dropdown-item nav-link  py-2 px-4 logout fw-semibold"  onClick={logout}><i className="bi bi-door-closed-fill align-middle fs-5 me-2 text-warning"></i> Log Out</span></li>
+                    <li><span className="dropdown-item nav-link  py-2 px-4 logout fw-semibold" onClick={logout}><i className="bi bi-door-closed-fill align-middle fs-5 me-2 text-warning"></i> Log Out</span></li>
                   </>
                   : <>
                     <li><Link className="dropdown-item nav-link py-2 px-4 fw-semibold" to="/login"><i className="bi bi-door-open-fill align-middle fs-5 me-2 text-warning"></i> Login</Link></li>
@@ -74,7 +84,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item position-relative">
               <NavLink className="nav-link" to="/cart"><i className="bi bi-cart3 fs-4"></i></NavLink>
-              <div className="rounded-circle position-absolute  text-white cart">{totalItems} </div>
+              <NavLink to="/cart" className="nav-link rounded-circle position-absolute  text-white cart">{totalItems} </NavLink>
             </li>
           </ul>
         </div>

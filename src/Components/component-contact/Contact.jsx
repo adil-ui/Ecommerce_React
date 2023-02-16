@@ -1,15 +1,22 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { API_URL } from '../../config/constants';
 import Footer from '../component-footer/Footer';
 import './Contact.css'
 
 const Contact = () =>{
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [description, setDescription] = useState("");
     const [message, setMessage] = useState("");
+    const [notification, setNotification] = useState('');
     const contact = async (e) => {
         e.preventDefault();
+        try {
+        const res = await axios.post(API_URL + 'api/contact', { name, email, message })
+            setNotification(res.data.success)
+        } catch (error) {
+            setNotification(error.data.error)
+        }
     };
     return(
         <>
@@ -26,7 +33,7 @@ const Contact = () =>{
                 <h3 className='text-center fw-bolder mb-3 text-warning'>Contact Us</h3>
                 <div className="mb-2 ">
                         <label className="form-label fw-semibold">Name <span class="text-danger">*</span></label>
-                        <input type="text" className="form-control" name='email' value={name} onChange={(e) => setEmail(e.target.value)} required />
+                        <input type="text" className="form-control" name='email' value={name} onChange={(e) => setName(e.target.value)} required />
                     </div>
                     <div className="mb-2 ">
                         <label className="form-label fw-semibold">Email <span class="text-danger">*</span></label>
@@ -34,9 +41,9 @@ const Contact = () =>{
                     </div>
                     <div class="mb-2">
                         <label class="form-label fw-semibold">Message <span class="text-danger">*</span></label>
-                        <textarea name="message" class="form-control" rows="5" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea >
+                        <textarea name="message" class="form-control" rows="5"  onChange={(e) => setMessage(e.target.value)} required>{message}</textarea >
                     </div>
-                    <div className="message">{message ? <p>{message}</p> : null}</div>
+                    <div className="message">{notification ? <p>{notification}</p> : null}</div>
                     <div className="mt-4">
                         <button type="submit" className="btn btn-warning col-12 fw-semibold px-4">Submit</button>
                     </div>

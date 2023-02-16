@@ -27,6 +27,7 @@ import ConfirmEmail from './Components/component-auth/Component-validation/Confi
 import OrderDetails from './Components/Component-dashboard/component-order-details/OrderDetails';
 import AllOrders from './Components/Component-dashboard/component-all-orders/AllOrders';
 import MyOrder from './Components/Component-dashboard/comoponent-list-order/MyOrder';
+import LoggedIn from './Components/LoggedIn/LoggedIn';
 
 function App() {
   const [user, setUser] = useState();
@@ -52,8 +53,9 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/order' element={<Order/>}/>
           <Route path='/register' element={<Register/>}/>
-          {user? null : <Route path='/login'  element={<Login/>} />}
-          <Route path='/login'  element={<Login/>} />
+          <Route path='/login'  element={<LoggedIn user={user}>
+            <Login/>
+          </LoggedIn>} />
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
           <Route path='/confirm-email' element={<ConfirmEmail/>}/>
           <Route path='/reset-password/:token' element={<ResetPassword/>}/>

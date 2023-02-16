@@ -1,11 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../config/constants';
 import AuthContext from '../../../context/auth-context';
 import './Login.css'
 import axios from 'axios';
-import getCookie from '../../../helpers/getCookie';
 import Footer from '../../component-footer/Footer';
+import validator from 'validator';
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -13,18 +14,33 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
-
+    const emailRef = useRef();
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        if (validator.isEmail(e.target.value)) {
+            emailRef.current.style.color = "black";
+            emailRef.current.style.border = "none";
+        } else {
+            emailRef.current.style.color = "red";
+            emailRef.current.style.border = "1px solid red";
+        }
+    }
     const clickLogin = async (e) => {
         e.preventDefault();
-        try {
-            let res = await axios.post(API_URL + "api/login", { email, password })
-            console.log(res);
-            setUser({ ...res.data.user, token: res.data.token });
-            localStorage.setItem('user', JSON.stringify({ ...res.data.user, token: res.data.token }));
-            navigate('/admin')
-        } catch (err) {
-            console.log(err);
-            setMessage('User not Found');
+        if (validator.isEmail(email)) {
+            try {
+                let res = await axios.post(API_URL + "api/login", { email, password })
+                console.log(res);
+                setUser({ ...res.data.user, token: res.data.token });
+                localStorage.setItem('user', JSON.stringify({ ...res.data.user, token: res.data.token }));
+                navigate('/admin')
+            } catch (err) {
+                console.log(err);
+                setMessage('User not Found');
+            }
+        }else{
+            setMessage('email invalid');
+
         }
     }
     return (
@@ -42,7 +58,7 @@ const Login = () => {
                         <h3 className='text-center fw-bolder mb-4 text-warning'>Login</h3>
                         <div className="mb-2 ">
                             <label className="form-label fw-semibold">Email</label>
-                            <input type="email" className="form-control" name='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <input type="email" ref={emailRef} className="form-control" name='email' value={email} onChange={handleEmailChange} required />
                         </div>
                         <div className="">
                             <label className="form-label fw-semibold">Password</label>
@@ -54,7 +70,7 @@ const Login = () => {
                             <NavLink to={'/register'} className="text-warning fw-semibold">Register ?</NavLink>
                         </div>
                         <div className="mt-4">
-                            <button type="submit" className="btn btn-warning col-12 fw-semibold px-4">Connect</button>
+                            <button disabled={!validator.isEmail(email)} type="submit" className="btn btn-warning col-12 fw-semibold px-4">Connect</button>
                         </div>
                     </form>
                 </div>

@@ -83,7 +83,7 @@ const ListProduct = () => {
             })
     };
     return (
-        <div>
+        <div className='all_product'>
             <table className="table table-hover">
                 <thead>
                     <tr>
@@ -113,10 +113,10 @@ const ListProduct = () => {
                     ))}
                 </tbody>
             </table>
-            <nav aria-label="..." className='mt-5'>
-                <ul className="pagination justify-content-center">
+            <nav aria-label="..." className='mt-5 pagination_product'>
+                <ul className="pagination ">
                     <li className={`page-item ${currenPage === 1 ? "disabled" : ""}`}>
-                        <button onClick={previous} class="page-link">Previous</button>
+                        <span onClick={previous} class="page-link">Previous</span>
                     </li>
                     {new Array(numberPages).fill(0).map((elt, index) => (
                         <li key={index} className={`page-item ${(index + 1) === currenPage ? "active" : ""}`} aria-current="page">
@@ -124,7 +124,7 @@ const ListProduct = () => {
                         </li>
                     ))}
                     <li className={`page-item ${currenPage === numberPages ? "disabled" : ""}`}>
-                        <button className="page-link" onClick={next}>Next</button>
+                        <span className="page-link" onClick={next}>Next</span>
                     </li>
                 </ul>
             </nav>
