@@ -1,28 +1,16 @@
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { API_URL } from '../../../config/constants';
-import AuthContext from '../../../context/auth-context';
+import Pagination from '../../Pagination/Pagination';
 import './ListProduct.css'
-
-const ITEMS_PER_PAGE = 5;
 
 const ListProduct = () => {
     const [products, setProducts] = useState([]);
-    const [numberPages, setNumberPages] = useState(0);
-    const [currenPage, setCurrentPage] = useState(1);
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        axios.get(API_URL + "api/all-product", {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        })
-            .then(result => {
-                setNumberPages(Math.ceil(result.data.products.length / ITEMS_PER_PAGE));
-            })
-        fetch(API_URL + "api/products/" + currenPage, {
+        fetch(API_URL + "api/products/1", {
             headers: {
                 'Authorization': `Bearer ${user.token}`
             }
@@ -44,46 +32,11 @@ const ListProduct = () => {
             });
     }
 
-    const previous = () => {
-        let newPage = currenPage - 1;
-        setCurrentPage(newPage);
-        axios.get(API_URL + "api/products/" + newPage, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
-        }).then(result => {
-            setProducts(result.data.products);
-        })
-    };
-
-    const next = () => {
-        let newPage = currenPage + 1;
-        setCurrentPage(newPage);
-        fetch(API_URL + "api/products/" + newPage, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-            .then(response => response.json())
-            .then(result => {
-                setProducts(result.products);
-            })
-    };
-
-    const goToPage = (page) => {
-        setCurrentPage(page);
-        fetch(API_URL + "api/products/" + page, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-            .then(response => response.json())
-            .then(result => {
-                setProducts(result.products);
-            })
-    };
     return (
         <div className='all_product'>
+            <div className=' mb-4'>
+                <Link to="/admin/add-product" className='btn btn-success  px-3 '><i className="bi bi-plus align-middle"></i> Add Product</Link>
+            </div>
             <table className="table table-hover">
                 <thead>
                     <tr>
@@ -113,21 +66,27 @@ const ListProduct = () => {
                     ))}
                 </tbody>
             </table>
-            <nav aria-label="..." className='mt-5 pagination_product'>
+            <Pagination
+                setElements={setProducts}
+                elementName="products"
+                url={"api/products/"}
+                allElementsUrl={"api/all-product"}
+            />
+            {/*<nav aria-label="..." className='mt-5 pagination_product'>
                 <ul className="pagination ">
-                    <li className={`page-item ${currenPage === 1 ? "disabled" : ""}`}>
+                    <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
                         <span onClick={previous} class="page-link">Previous</span>
                     </li>
                     {new Array(numberPages).fill(0).map((elt, index) => (
-                        <li key={index} className={`page-item ${(index + 1) === currenPage ? "active" : ""}`} aria-current="page">
+                        <li key={index} className={`page-item ${(index + 1) === currentPage ? "active" : ""}`} aria-current="page">
                             <span onClick={() => goToPage(index + 1)} className="page-link">{index + 1}</span>
                         </li>
                     ))}
-                    <li className={`page-item ${currenPage === numberPages ? "disabled" : ""}`}>
+                    <li className={`page-item ${currentPage === numberPages ? "disabled" : ""}`}>
                         <span className="page-link" onClick={next}>Next</span>
                     </li>
                 </ul>
-            </nav>
+                    </nav>*/}
         </div>
     )
 }

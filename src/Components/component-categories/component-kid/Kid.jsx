@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useCart } from 'react-use-cart';
 import { API_URL } from '../../../config/constants';
+import BreadCrumbs from '../../BreadCrumbs/BreadCrumbs';
 import Footer from '../../component-footer/Footer';
 import ProductCard from '../../ProductCard/ProductCard';
 import './Kid.css'
 
 const Kid = () =>{
-    const { addItem } = useCart();
     const [kidCategory, setkidCategory] = useState([]);
     useEffect(() => {
         fetch(API_URL + "api/kid-category")
@@ -22,11 +21,11 @@ const Kid = () =>{
     }, [])
     return(
         <>
-        <section className='container mx-auto mt-5 pt-4'>
+        <section className='container mx-auto mt-5 pt-5'>
+        <BreadCrumbs />
             <div class="Product_category  mt-5 mb-4 d-flex justify-content-center align-items-center " >
                 <h2 className='category_title' class="text-white fw-bolder category_title">Check Kid's Products</h2>
             </div>
-
             <div class="py-5 row gx-4 gy-5">
                 <h2 class="fw-bolder text-center ">Kid's Products</h2>
                 <div className='text-end mb-4'>

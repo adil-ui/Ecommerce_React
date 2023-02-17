@@ -15,6 +15,7 @@ const Login = () => {
     const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const emailRef = useRef();
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
         if (validator.isEmail(e.target.value)) {
@@ -25,6 +26,7 @@ const Login = () => {
             emailRef.current.style.border = "1px solid red";
         }
     }
+    
     const clickLogin = async (e) => {
         e.preventDefault();
         if (validator.isEmail(email)) {

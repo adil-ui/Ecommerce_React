@@ -20,3 +20,13 @@ a{
 .page404{
     height: 90vh;
 }
+.sectionOrder{
+    height: 450px;
+	position: relative;
+}
+.pagination_product{
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translate(-50%,0);
+}

@@ -3,13 +3,11 @@ import axiosInstance from '../../config/axios';
 import './Home.css'
 import { API_URL } from '../../config/constants';
 import { NavLink } from 'react-router-dom';
-import { useCart } from "react-use-cart";
 import Footer from '../component-footer/Footer';
 import ProductCard from '../ProductCard/ProductCard';
 
 
 const Home = () => {
-    const { addItem } = useCart();
 
     const [womenProduct, setWomenProduct] = useState([]);
     const [menProduct, setMenProduct] = useState([]);

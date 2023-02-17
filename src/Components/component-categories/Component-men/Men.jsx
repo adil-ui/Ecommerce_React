@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useCart } from 'react-use-cart';
 import { API_URL } from '../../../config/constants';
 import Footer from '../../component-footer/Footer';
 import ProductCard from '../../ProductCard/ProductCard';
+import BreadCrumbs from '../../BreadCrumbs/BreadCrumbs';
+
 import './Men.css'
 
 const Men = () =>{
-    const { addItem } = useCart();
     const [MenCategory, setMenCategory] = useState([]);
     useEffect(() => {
         fetch(API_URL + "api/men-category")
@@ -23,7 +23,8 @@ const Men = () =>{
     
     return(
         <>
-        <section className='container mx-auto mt-5 pt-4'>
+        <section className='container mx-auto mt-5 pt-5'>
+        <BreadCrumbs />
             <div class="Product_category  mt-5 mb-4 d-flex justify-content-center align-items-center " >
                 <h2 className='category_title' class="text-white fw-bolder category_title">Check Men's Products</h2>
             </div>

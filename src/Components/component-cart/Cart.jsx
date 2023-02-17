@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { API_URL } from '../../config/constants';
 import { useEffect, useState } from 'react';
 import Footer from '../component-footer/Footer';
+import BreadCrumbs from '../BreadCrumbs/BreadCrumbs';
+
 
 const Cart = () => {
     const {
@@ -20,7 +22,9 @@ const Cart = () => {
     return (
         <>
             <section className='myCart mt-5 py-5'>
+                
                 <div className=" container mx-auto row d-flex justify-content-between ">
+                    <BreadCrumbs />
                     <div className="cartItem col-8 bg-white rounded-1 py-2 shadow-sm">
                         <h4 className='fw-semibold m-3'>Cart ({totalItems})</h4>
                         {totalItems === 0 ?

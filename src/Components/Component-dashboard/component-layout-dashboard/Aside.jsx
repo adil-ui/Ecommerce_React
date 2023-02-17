@@ -24,11 +24,8 @@ const Aside = () =>{
                         {userRole === 'admin' &&
                         <>
                             <div className='aside_item '>
-                                <Link to="/admin/list-product" className='aside_link px-5 fw-semibold'><i className="bi bi-list-columns-reverse align-middle fs-4 me-2 icon_color"></i> All products</Link>
-                            </div>
-                            <div className='aside_item'>
-                                <Link to="/admin/add-product" className='aside_link px-5 fw-semibold'><i className="bi bi-database-fill-add align-middle fs-4 me-2 icon_color"></i> Add Product</Link>
-                            </div>
+                                <Link to="/admin/list-product" className='aside_link px-5 fw-semibold'><i className="bi bi-box-seam-fill align-middle fs-4 me-2 icon_color"></i> Products</Link>
+                            </div>                           
                             <div className='aside_item'>
                                 <Link to="/admin/all-orders" className='aside_link px-5 fw-semibold'> <i className="bi bi-list-columns-reverse align-middle fs-4 me-2 icon_color"></i> All orders</Link>
                             </div>

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useCart } from 'react-use-cart';
 import { API_URL } from '../../config/constants';
 import AuthContext from '../../context/auth-context';
+import BreadCrumbs from '../BreadCrumbs/BreadCrumbs';
 import Footer from '../component-footer/Footer';
 import './Order.css'
 
@@ -92,6 +93,7 @@ const Order = () => {
         <>
             <section className='myCart mt-5 py-5'>
                 <div class=" container mx-auto row d-flex justify-content-between ">
+                <BreadCrumbs />
                     <div class="col-7 bg-white shadow-sm rounded-1 py-4 myOrder">
                         <form class="row g-3 col-10 mx-auto " onSubmit={order} method='POST' encType="multipart/form-data">
                             <div class="col-md-12 mb-3">

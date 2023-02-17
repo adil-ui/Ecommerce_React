@@ -5,6 +5,7 @@ import { API_URL } from '../../config/constants'
 
 const ProductCard = ({ elt }) => {
     const { addItem } = useCart();
+    console.log(elt)
     return (
         <div className="col-md-3 mt-4 mb-5">
             <div className="product_card shadow position-relative" >
